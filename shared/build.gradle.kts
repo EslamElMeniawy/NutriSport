@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -6,6 +8,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.buildKonfig)
 }
 
 kotlin {
@@ -62,5 +65,19 @@ android {
     }
     testOptions {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
+    }
+}
+
+buildkonfig {
+    packageName = "elmeniawy.eslam.nutrisport.shared"
+
+    defaultConfigs {
+        val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("WEB_CLIENT_ID")
+
+        require(apiKey.isNotEmpty()) {
+            "Register your api key from developer and place it in local.properties as `WEB_CLIENT_ID`"
+        }
+
+        buildConfigField(FieldSpec.Type.STRING, "WEB_CLIENT_ID", apiKey)
     }
 }
