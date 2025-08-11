@@ -19,7 +19,6 @@ import elmeniawy.eslam.nutrisport.home.domain.BottomBarDestination
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
 import elmeniawy.eslam.nutrisport.shared.IconSecondary
 import elmeniawy.eslam.nutrisport.shared.SurfaceLighter
-import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -33,7 +32,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun BottomBar(
     modifier: Modifier = Modifier,
-    selected: Screen = Screen.ProductsOverview,
+    selected: BottomBarDestination = BottomBarDestination.ProductsOverview,
     onSelect: (BottomBarDestination) -> Unit
 ) {
     Row(
@@ -47,7 +46,7 @@ fun BottomBar(
     ) {
         BottomBarDestination.entries.forEach { destination ->
             val animatedTint by animateColorAsState(
-                targetValue = if (selected == destination.screen) IconSecondary else IconPrimary
+                targetValue = if (selected == destination) IconSecondary else IconPrimary
             )
 
             IconButton(onClick = { onSelect(destination) }) {
