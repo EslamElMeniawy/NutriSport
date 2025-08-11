@@ -3,6 +3,8 @@ package elmeniawy.eslam.nutrisport
 import android.app.Application
 import com.google.firebase.Firebase
 import com.google.firebase.initialize
+import elmeniawy.eslam.nutrisport.di.initializeKoin
+import org.koin.android.ext.koin.androidContext
 
 /**
  * MyApplication
@@ -12,6 +14,7 @@ import com.google.firebase.initialize
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        initializeKoin(config = { androidContext(this@MyApplication) })
         Firebase.initialize(context = this)
     }
 }

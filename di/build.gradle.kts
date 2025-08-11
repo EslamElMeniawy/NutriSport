@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -23,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "navigation"
+            baseName = "di"
             isStatic = true
         }
     }
@@ -38,9 +37,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.compose.navigation)
-            implementation(libs.kotlinx.serialization)
-            implementation(project(path = ":feature:auth"))
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -49,7 +48,7 @@ kotlin {
 }
 
 android {
-    namespace = "elmeniawy.eslam.nutrisport.navigation"
+    namespace = "elmeniawy.eslam.nutrisport.di"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
