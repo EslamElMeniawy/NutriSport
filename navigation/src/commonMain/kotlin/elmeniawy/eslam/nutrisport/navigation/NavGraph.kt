@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import elmeniawy.eslam.nutrisport.auth.AuthScreen
 import elmeniawy.eslam.nutrisport.home.HomeGraphScreen
+import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**

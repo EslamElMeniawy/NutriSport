@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
 import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
-import elmeniawy.eslam.nutrisport.navigation.Screen
+import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import elmeniawy.eslam.nutrisport.navigation.SetupNavGraph
 import elmeniawy.eslam.nutrisport.shared.Constants
 import elmeniawy.eslam.nutrisport.shared.Surface
