@@ -2,6 +2,7 @@ package elmeniawy.eslam.nutrisport.data
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
+import dev.gitlive.firebase.auth.auth
 import dev.gitlive.firebase.firestore.firestore
 import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
 import elmeniawy.eslam.nutrisport.shared.domain.Customer
@@ -12,6 +13,8 @@ import elmeniawy.eslam.nutrisport.shared.domain.Customer
  * Created by Eslam El-Meniawy on 11-Aug-2025 at 12:59 PM.
  */
 class CustomerRepositoryImp : CustomerRepository {
+    override fun getCurrentUserId(): String? = Firebase.auth.currentUser?.uid
+
     override suspend fun createCustomer(
         user: FirebaseUser?,
         onSuccess: (() -> Unit)?,

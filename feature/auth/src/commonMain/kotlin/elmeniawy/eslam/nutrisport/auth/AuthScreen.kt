@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +30,8 @@ import elmeniawy.eslam.nutrisport.shared.SurfaceError
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import elmeniawy.eslam.nutrisport.shared.TextSecondary
 import elmeniawy.eslam.nutrisport.shared.TextWhite
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
@@ -41,7 +44,8 @@ import rememberMessageBarState
 
 @Composable
 @Preview
-fun AuthScreen() {
+fun AuthScreen(navigateToHome: (() -> Unit)? = null) {
+    val coroutineScope = rememberCoroutineScope()
     val viewModel = koinViewModel<AuthViewModel>()
     val messageBarState = rememberMessageBarState()
     var loadingState by remember { mutableStateOf(false) }
@@ -91,7 +95,11 @@ fun AuthScreen() {
                             viewModel.createCustomer(
                                 user = user,
                                 onSuccess = {
-                                    messageBarState.addSuccess("Authentication successful!")
+                                    coroutineScope.launch {
+                                        messageBarState.addSuccess("Authentication successful!")
+                                        delay(2000)
+                                        navigateToHome?.invoke()
+                                    }
                                 },
                                 onError = { message ->
                                     messageBarState.addError(message)

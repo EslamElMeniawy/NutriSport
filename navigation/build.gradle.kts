@@ -41,6 +41,7 @@ kotlin {
             implementation(libs.compose.navigation)
             implementation(libs.kotlinx.serialization)
             implementation(project(path = ":feature:auth"))
+            implementation(project(path = ":feature:home"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

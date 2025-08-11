@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import elmeniawy.eslam.nutrisport.auth.AuthScreen
+import elmeniawy.eslam.nutrisport.home.HomeGraphScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -15,10 +16,18 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun SetupNavGraph() {
+fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.Auth) {
-        composable<Screen.Auth> { AuthScreen() }
+    NavHost(navController = navController, startDestination = startDestination) {
+        composable<Screen.Auth> {
+            AuthScreen(navigateToHome = {
+                navController.navigate(Screen.HomeGraph) {
+                    popUpTo<Screen.Auth> { inclusive = true }
+                }
+            })
+        }
+
+        composable<Screen.HomeGraph> { HomeGraphScreen() }
     }
 }

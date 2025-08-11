@@ -13,16 +13,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.mmk.kmpauth.google.GoogleAuthCredentials
 import com.mmk.kmpauth.google.GoogleAuthProvider
+import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
+import elmeniawy.eslam.nutrisport.navigation.Screen
 import elmeniawy.eslam.nutrisport.navigation.SetupNavGraph
 import elmeniawy.eslam.nutrisport.shared.Constants
 import elmeniawy.eslam.nutrisport.shared.Surface
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.koinInject
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme(colorScheme = lightColorScheme(background = Surface)) {
+        val customerRepository = koinInject<CustomerRepository>()
         var appReady by remember { mutableStateOf(false) }
+        val isUserAuthenticated = remember { customerRepository.getCurrentUserId() != null }
+
+        val startDestination = remember {
+            if (isUserAuthenticated) Screen.HomeGraph else Screen.Auth
+        }
 
         LaunchedEffect(Unit) {
             GoogleAuthProvider.create(
@@ -33,7 +42,7 @@ fun App() {
         }
 
         AnimatedVisibility(modifier = Modifier.fillMaxSize(), visible = appReady) {
-            SetupNavGraph()
+            SetupNavGraph(startDestination = startDestination)
         }
     }
 }
