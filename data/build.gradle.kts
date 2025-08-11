@@ -12,7 +12,7 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 
@@ -22,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "auth"
+            baseName = "data"
             isStatic = true
         }
     }
@@ -37,13 +37,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.messagebar.kmp)
-            implementation(libs.auth.kmp)
+            implementation(libs.firebase.firestore)
             implementation(libs.auth.firebase.kmp)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
             implementation(project(path = ":shared"))
-            implementation(project(path = ":data"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -52,15 +48,15 @@ kotlin {
 }
 
 android {
-    namespace = "elmeniawy.eslam.nutrisport.auth"
+    namespace = "elmeniawy.eslam.nutrisport.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     testOptions {
         targetSdk = libs.versions.android.targetSdk.get().toInt()

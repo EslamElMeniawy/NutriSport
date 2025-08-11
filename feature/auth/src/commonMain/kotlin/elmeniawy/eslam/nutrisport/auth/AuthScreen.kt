@@ -30,6 +30,7 @@ import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import elmeniawy.eslam.nutrisport.shared.TextSecondary
 import elmeniawy.eslam.nutrisport.shared.TextWhite
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
 
 /**
@@ -41,6 +42,7 @@ import rememberMessageBarState
 @Composable
 @Preview
 fun AuthScreen() {
+    val viewModel = koinViewModel<AuthViewModel>()
     val messageBarState = rememberMessageBarState()
     var loadingState by remember { mutableStateOf(false) }
 
@@ -86,7 +88,16 @@ fun AuthScreen() {
                     linkAccount = false,
                     onResult = { result ->
                         result.onSuccess { user ->
-                            messageBarState.addSuccess("Authentication successful!")
+                            viewModel.createCustomer(
+                                user = user,
+                                onSuccess = {
+                                    messageBarState.addSuccess("Authentication successful!")
+                                },
+                                onError = { message ->
+                                    messageBarState.addError(message)
+                                }
+                            )
+
                             loadingState = false
                         }.onFailure { error ->
                             if (error.message?.lowercase()?.contains("network error") == true) {
