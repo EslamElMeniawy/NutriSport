@@ -24,8 +24,11 @@ import elmeniawy.eslam.nutrisport.shared.Alpha
 import elmeniawy.eslam.nutrisport.shared.BebasNeueFont
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.Surface
+import elmeniawy.eslam.nutrisport.shared.SurfaceBrand
+import elmeniawy.eslam.nutrisport.shared.SurfaceError
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import elmeniawy.eslam.nutrisport.shared.TextSecondary
+import elmeniawy.eslam.nutrisport.shared.TextWhite
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import rememberMessageBarState
 
@@ -49,7 +52,11 @@ fun AuthScreen() {
                 bottom = padding.calculateBottomPadding()
             ),
             messageBarState = messageBarState,
-            errorMaxLines = 2
+            errorMaxLines = 2,
+            errorContainerColor = SurfaceError,
+            errorContentColor = TextWhite,
+            successContainerColor = SurfaceBrand,
+            successContentColor = TextPrimary
         ) {
             Column(modifier = Modifier.fillMaxSize().padding(all = 24.dp)) {
                 Column(
