@@ -30,7 +30,7 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":shared")
-include(":feature:auth")
 include(":navigation")
 include(":di")
 include(":data")
+include(":feature:auth")
