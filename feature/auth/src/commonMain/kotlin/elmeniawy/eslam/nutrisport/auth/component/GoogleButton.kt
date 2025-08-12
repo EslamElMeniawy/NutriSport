@@ -29,10 +29,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import elmeniawy.eslam.nutrisport.shared.BorderIdle
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.IconSecondary
 import elmeniawy.eslam.nutrisport.shared.Resources
-import elmeniawy.eslam.nutrisport.shared.SurfaceDarker
 import elmeniawy.eslam.nutrisport.shared.SurfaceLighter
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import org.jetbrains.compose.resources.DrawableResource
@@ -55,7 +55,7 @@ fun GoogleButton(
     icon: DrawableResource = Resources.Image.GoogleLogo,
     shape: Shape = RoundedCornerShape(size = 99.dp),
     backgroundColor: Color = SurfaceLighter,
-    borderColor: Color = SurfaceDarker,
+    borderColor: Color = BorderIdle,
     progressIndicatorColor: Color = IconSecondary,
     onClick: () -> Unit
 ) {
