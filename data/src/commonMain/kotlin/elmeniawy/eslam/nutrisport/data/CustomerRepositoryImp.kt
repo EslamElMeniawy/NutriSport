@@ -6,6 +6,7 @@ import dev.gitlive.firebase.auth.auth
 import dev.gitlive.firebase.firestore.firestore
 import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
 import elmeniawy.eslam.nutrisport.shared.domain.Customer
+import elmeniawy.eslam.nutrisport.shared.util.RequestState
 
 /**
  * CustomerRepositoryImp
@@ -43,5 +44,12 @@ class CustomerRepositoryImp : CustomerRepository {
         } catch (e: Exception) {
             onError?.invoke("Error while creating a Customer: ${e.message}")
         }
+    }
+
+    override suspend fun signOut(): RequestState<Unit> = try {
+        Firebase.auth.signOut()
+        RequestState.Success(data = Unit)
+    } catch (e: Exception) {
+        RequestState.Error("Error while signing out: ${e.message}")
     }
 }

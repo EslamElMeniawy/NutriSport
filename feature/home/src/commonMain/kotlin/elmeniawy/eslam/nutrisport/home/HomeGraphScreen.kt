@@ -2,6 +2,7 @@
 
 package elmeniawy.eslam.nutrisport.home
 
+import ContentWithMessageBar
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
@@ -51,12 +52,17 @@ import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
 import elmeniawy.eslam.nutrisport.shared.Resources
 import elmeniawy.eslam.nutrisport.shared.Surface
+import elmeniawy.eslam.nutrisport.shared.SurfaceBrand
+import elmeniawy.eslam.nutrisport.shared.SurfaceError
 import elmeniawy.eslam.nutrisport.shared.SurfaceLighter
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
+import elmeniawy.eslam.nutrisport.shared.TextWhite
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import elmeniawy.eslam.nutrisport.shared.util.getScreenWidth
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
+import rememberMessageBarState
 
 /**
  * HomeGraphScreen
@@ -66,7 +72,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun HomeGraphScreen() {
+fun HomeGraphScreen(
+    navigateToAuth: (() -> Unit)? = null
+) {
+    val viewModel = koinViewModel<HomeGraphViewModel>()
+    val messageBarState = rememberMessageBarState()
     val navController = rememberNavController()
     val currentRouteState = navController.currentBackStackEntryAsState()
 
@@ -112,7 +122,12 @@ fun HomeGraphScreen() {
         CustomDrawer(
             onProfileClick = {},
             onContactUsClick = {},
-            onSignOutClick = {},
+            onSignOutClick = {
+                viewModel.signOut(
+                    onSuccess = { navigateToAuth?.invoke() },
+                    onError = { message -> messageBarState.addError(message) }
+                )
+            },
             onAdminPanelClick = {}
         )
 
@@ -172,40 +187,51 @@ fun HomeGraphScreen() {
                     )
                 }
             ) { padding ->
-                Column(
-                    modifier = Modifier.fillMaxSize().padding(
-                        top = padding.calculateTopPadding(),
-                        bottom = padding.calculateBottomPadding()
-                    )
+                ContentWithMessageBar(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(
+                            top = padding.calculateTopPadding(),
+                            bottom = padding.calculateBottomPadding()
+                        ),
+                    messageBarState = messageBarState,
+                    errorMaxLines = 2,
+                    contentBackgroundColor = Surface,
+                    errorContainerColor = SurfaceError,
+                    errorContentColor = TextWhite,
+                    successContainerColor = SurfaceBrand,
+                    successContentColor = TextPrimary
                 ) {
-                    NavHost(
-                        modifier = Modifier.weight(1f),
-                        navController = navController,
-                        startDestination = Screen.ProductsOverview
-                    ) {
-                        composable<Screen.ProductsOverview> { }
-                        composable<Screen.Cart> { }
-                        composable<Screen.Categories> { }
-                    }
+                    Column(modifier = Modifier.fillMaxSize()) {
+                        NavHost(
+                            modifier = Modifier.weight(1f),
+                            navController = navController,
+                            startDestination = Screen.ProductsOverview
+                        ) {
+                            composable<Screen.ProductsOverview> { }
+                            composable<Screen.Cart> { }
+                            composable<Screen.Categories> { }
+                        }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(12.dp))
 
-                    Box(modifier = Modifier.padding(all = 12.dp)) {
-                        BottomBar(
-                            selected = selectedDestination,
-                            onSelect = { destination ->
-                                navController.navigate(destination.screen) {
-                                    launchSingleTop = true
+                        Box(modifier = Modifier.padding(all = 12.dp)) {
+                            BottomBar(
+                                selected = selectedDestination,
+                                onSelect = { destination ->
+                                    navController.navigate(destination.screen) {
+                                        launchSingleTop = true
 
-                                    popUpTo<Screen.ProductsOverview> {
-                                        saveState = true
-                                        inclusive = false
+                                        popUpTo<Screen.ProductsOverview> {
+                                            saveState = true
+                                            inclusive = false
+                                        }
+
+                                        restoreState = true
                                     }
-
-                                    restoreState = true
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }

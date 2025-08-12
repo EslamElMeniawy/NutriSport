@@ -3,6 +3,7 @@ package elmeniawy.eslam.nutrisport.di
 import elmeniawy.eslam.nutrisport.auth.AuthViewModel
 import elmeniawy.eslam.nutrisport.data.CustomerRepositoryImp
 import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
+import elmeniawy.eslam.nutrisport.home.HomeGraphViewModel
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.viewModelOf
@@ -17,6 +18,7 @@ import org.koin.dsl.module
 val sharedModule = module {
     single<CustomerRepository> { CustomerRepositoryImp() }
     viewModelOf(::AuthViewModel)
+    viewModelOf(::HomeGraphViewModel)
 }
 
 fun initializeKoin(config: (KoinApplication.() -> Unit)? = null) {

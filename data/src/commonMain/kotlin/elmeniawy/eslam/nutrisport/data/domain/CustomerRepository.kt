@@ -1,6 +1,7 @@
 package elmeniawy.eslam.nutrisport.data.domain
 
 import dev.gitlive.firebase.auth.FirebaseUser
+import elmeniawy.eslam.nutrisport.shared.util.RequestState
 
 /**
  * CustomerRepository
@@ -15,4 +16,6 @@ interface CustomerRepository {
         onSuccess: (() -> Unit)? = null,
         onError: ((String) -> Unit)? = null
     )
+
+    suspend fun signOut(): RequestState<Unit>
 }
