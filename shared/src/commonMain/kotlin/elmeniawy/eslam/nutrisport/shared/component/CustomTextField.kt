@@ -1,4 +1,4 @@
-package elmeniawy.eslam.nutrisport.profile.component
+package elmeniawy.eslam.nutrisport.shared.component
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.border
@@ -73,7 +73,10 @@ fun CustomTextField(
             disabledContainerColor = SurfaceLighter,
             focusedTextColor = TextPrimary,
             unfocusedTextColor = TextPrimary,
-            disabledTextColor = TextPrimary.copy(alpha = Alpha.DISABLED)
+            disabledTextColor = TextPrimary.copy(alpha = Alpha.DISABLED),
+            focusedPlaceholderColor = TextPrimary.copy(alpha = Alpha.HALF),
+            unfocusedPlaceholderColor = TextPrimary.copy(alpha = Alpha.HALF),
+            disabledPlaceholderColor = TextPrimary.copy(alpha = Alpha.DISABLED)
         )
     )
 }

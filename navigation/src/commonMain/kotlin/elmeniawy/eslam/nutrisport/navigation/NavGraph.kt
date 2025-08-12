@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import elmeniawy.eslam.nutrisport.auth.AuthScreen
 import elmeniawy.eslam.nutrisport.home.HomeGraphScreen
+import elmeniawy.eslam.nutrisport.profile.ProfileScreen
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -30,11 +31,20 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
         }
 
         composable<Screen.HomeGraph> {
-            HomeGraphScreen(navigateToAuth = {
-                navController.navigate(Screen.Auth) {
-                    popUpTo<Screen.HomeGraph> { inclusive = true }
+            HomeGraphScreen(
+                navigateToAuth = {
+                    navController.navigate(Screen.Auth) {
+                        popUpTo<Screen.HomeGraph> { inclusive = true }
+                    }
+                },
+                navigateToProfile = {
+                    navController.navigate(Screen.Profile)
                 }
-            })
+            )
+        }
+
+        composable<Screen.Profile> {
+            ProfileScreen()
         }
     }
 }

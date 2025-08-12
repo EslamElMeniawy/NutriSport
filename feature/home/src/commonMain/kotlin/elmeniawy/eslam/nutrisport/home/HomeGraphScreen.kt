@@ -73,7 +73,8 @@ import rememberMessageBarState
 @Composable
 @Preview
 fun HomeGraphScreen(
-    navigateToAuth: (() -> Unit)? = null
+    navigateToAuth: (() -> Unit)? = null,
+    navigateToProfile: (() -> Unit)? = null
 ) {
     val viewModel = koinViewModel<HomeGraphViewModel>()
     val messageBarState = rememberMessageBarState()
@@ -120,7 +121,7 @@ fun HomeGraphScreen(
             .systemBarsPadding()
     ) {
         CustomDrawer(
-            onProfileClick = {},
+            onProfileClick = navigateToProfile,
             onContactUsClick = {},
             onSignOutClick = {
                 viewModel.signOut(
