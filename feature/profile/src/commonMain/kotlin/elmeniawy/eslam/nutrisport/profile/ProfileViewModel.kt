@@ -130,11 +130,11 @@ class ProfileViewModel(
                 phoneNumber = screenState.phoneNumber
             )
 
-//            _customerRepository.updateCustomer(
-//                customer = customer,
-//                onSuccess = onSuccess,
-//                onError = onError
-//            )
+            _customerRepository.updateCustomer(
+                customer = customer,
+                onSuccess = onSuccess,
+                onError = onError
+            )
         }
     }
 }

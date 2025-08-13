@@ -21,5 +21,11 @@ interface CustomerRepository {
 
     fun readCustomerFlow(): Flow<RequestState<Customer>>
 
+    suspend fun updateCustomer(
+        customer: Customer,
+        onSuccess: (() -> Unit)? = null,
+        onError: ((String) -> Unit)? = null
+    )
+
     suspend fun signOut(): RequestState<Unit>
 }
