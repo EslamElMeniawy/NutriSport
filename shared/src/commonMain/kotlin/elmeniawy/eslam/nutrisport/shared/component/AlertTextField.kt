@@ -48,10 +48,7 @@ fun AlertTextField(
             )
             .clip(shape = RoundedCornerShape(size = 6.dp))
             .clickable { onClick() }
-            .padding(
-                vertical = 20.dp,
-                horizontal = 16.dp
-            ),
+            .padding(all = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (icon != null) {
