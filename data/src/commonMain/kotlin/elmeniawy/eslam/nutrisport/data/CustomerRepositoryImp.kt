@@ -7,6 +7,9 @@ import dev.gitlive.firebase.firestore.firestore
 import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
 import elmeniawy.eslam.nutrisport.shared.domain.Customer
 import elmeniawy.eslam.nutrisport.shared.util.RequestState
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collectLatest
 
 /**
  * CustomerRepositoryImp
@@ -43,6 +46,41 @@ class CustomerRepositoryImp : CustomerRepository {
             }
         } catch (e: Exception) {
             onError?.invoke("Error while creating a Customer: ${e.message}")
+        }
+    }
+
+    override fun readCustomerFlow(): Flow<RequestState<Customer>> = channelFlow {
+        try {
+            val userId = getCurrentUserId()
+
+            if (userId != null) {
+                val database = Firebase.firestore
+
+                database.collection(collectionPath = "customer")
+                    .document(userId).snapshots.collectLatest { document ->
+                        if (document.exists) {
+                            val customer = Customer(
+                                id = document.id,
+                                firstName = document.get(field = "firstName"),
+                                lastName = document.get(field = "lastName"),
+                                email = document.get(field = "email"),
+                                city = document.get(field = "city"),
+                                postalCode = document.get(field = "postalCode"),
+                                address = document.get(field = "address"),
+                                phoneNumber = document.get(field = "phoneNumber"),
+                                cart = document.get(field = "cart")
+                            )
+
+                            send(RequestState.Success(data = customer))
+                        } else {
+                            send(RequestState.Error("Queried customer document does not exist."))
+                        }
+                    }
+            } else {
+                send(RequestState.Error("User is not available."))
+            }
+        } catch (e: Exception) {
+            send(RequestState.Error("Error while reading a Customer: ${e.message}"))
         }
     }
 
