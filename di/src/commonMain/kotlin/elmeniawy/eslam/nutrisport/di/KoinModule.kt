@@ -1,12 +1,17 @@
 package elmeniawy.eslam.nutrisport.di
 
+import elmeniawy.eslam.nutrisport.admin_panel.AdminPanelViewModel
 import elmeniawy.eslam.nutrisport.auth.AuthViewModel
+import elmeniawy.eslam.nutrisport.data.AdminRepositoryImpl
 import elmeniawy.eslam.nutrisport.data.CustomerRepositoryImp
+import elmeniawy.eslam.nutrisport.data.domain.AdminRepository
 import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
 import elmeniawy.eslam.nutrisport.home.HomeGraphViewModel
+import elmeniawy.eslam.nutrisport.manage_product.ManageProductViewModel
 import elmeniawy.eslam.nutrisport.profile.ProfileViewModel
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -18,14 +23,19 @@ import org.koin.dsl.module
 
 val sharedModule = module {
     single<CustomerRepository> { CustomerRepositoryImp() }
+    single<AdminRepository> { AdminRepositoryImpl() }
     viewModelOf(::AuthViewModel)
     viewModelOf(::HomeGraphViewModel)
     viewModelOf(::ProfileViewModel)
+    viewModelOf(::AdminPanelViewModel)
+    viewModelOf(::ManageProductViewModel)
 }
+
+expect val targetModule: Module
 
 fun initializeKoin(config: (KoinApplication.() -> Unit)? = null) {
     startKoin {
         config?.invoke(this)
-        modules(sharedModule)
+        modules(sharedModule, targetModule)
     }
 }
