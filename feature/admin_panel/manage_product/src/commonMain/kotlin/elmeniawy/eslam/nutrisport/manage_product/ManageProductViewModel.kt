@@ -69,7 +69,11 @@ class ManageProductViewModel(
                     updateTitle(product.title)
                     updateDescription(product.description)
                     updateThumbnail(product.thumbnail)
-                    updateThumbnailUploaderState(RequestState.Success(Unit))
+
+                    product.thumbnail?.let {
+                        updateThumbnailUploaderState(RequestState.Success(Unit))
+                    }
+
                     updateCategory(ProductCategory.valueOf(product.category ?: ""))
                     updateFlavors(product.flavors?.joinToString(",") ?: "")
                     updateWeight(product.weight)
