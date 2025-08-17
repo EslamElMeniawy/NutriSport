@@ -47,6 +47,7 @@ import elmeniawy.eslam.nutrisport.home.domain.BottomBarDestination
 import elmeniawy.eslam.nutrisport.home.domain.CustomDrawerState
 import elmeniawy.eslam.nutrisport.home.domain.isOpened
 import elmeniawy.eslam.nutrisport.home.domain.opposite
+import elmeniawy.eslam.nutrisport.products_overview.ProductsOverviewScreen
 import elmeniawy.eslam.nutrisport.shared.Alpha
 import elmeniawy.eslam.nutrisport.shared.BebasNeueFont
 import elmeniawy.eslam.nutrisport.shared.FontSize
@@ -76,7 +77,8 @@ import rememberMessageBarState
 fun HomeGraphScreen(
     navigateToAuth: (() -> Unit)? = null,
     navigateToProfile: (() -> Unit)? = null,
-    navigateToAdminPanel: (() -> Unit)? = null
+    navigateToAdminPanel: (() -> Unit)? = null,
+    navigateToDetails: ((String?) -> Unit)? = null
 ) {
     val viewModel = koinViewModel<HomeGraphViewModel>()
     val customer by viewModel.customer.collectAsState()
@@ -213,7 +215,12 @@ fun HomeGraphScreen(
                             navController = navController,
                             startDestination = Screen.ProductsOverview
                         ) {
-                            composable<Screen.ProductsOverview> { }
+                            composable<Screen.ProductsOverview> {
+                                ProductsOverviewScreen(
+                                    navigateToDetails = navigateToDetails
+                                )
+                            }
+
                             composable<Screen.Cart> { }
                             composable<Screen.Categories> { }
                         }
