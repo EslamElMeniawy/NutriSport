@@ -1,5 +1,6 @@
 package elmeniawy.eslam.nutrisport.home.component
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -17,6 +17,8 @@ import elmeniawy.eslam.nutrisport.shared.BebasNeueFont
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import elmeniawy.eslam.nutrisport.shared.TextSecondary
+import elmeniawy.eslam.nutrisport.shared.domain.Customer
+import elmeniawy.eslam.nutrisport.shared.util.RequestState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -28,6 +30,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @Preview
 fun CustomDrawer(
+    customer: RequestState<Customer>? = null,
     onProfileClick: (() -> Unit)? = null,
     onBlogClick: (() -> Unit)? = null,
     onLocationsClick: (() -> Unit)? = null,
@@ -80,10 +83,14 @@ fun CustomDrawer(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        DrawerItemCard(
-            drawerItem = DrawerItem.Admin,
-            onClick = onAdminPanelClick
-        )
+        AnimatedContent(targetState = customer) { customerState ->
+            if (customerState?.isSuccess() == true && customerState.getSuccessData().isAdmin == true) {
+                DrawerItemCard(
+                    drawerItem = DrawerItem.Admin,
+                    onClick = onAdminPanelClick
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(24.dp))
     }
