@@ -10,6 +10,7 @@ import elmeniawy.eslam.nutrisport.data.domain.CustomerRepository
 import elmeniawy.eslam.nutrisport.data.domain.ProductRepository
 import elmeniawy.eslam.nutrisport.home.HomeGraphViewModel
 import elmeniawy.eslam.nutrisport.manage_product.ManageProductViewModel
+import elmeniawy.eslam.nutrisport.product_details.ProductDetailsViewModel
 import elmeniawy.eslam.nutrisport.products_overview.ProductsOverviewViewModel
 import elmeniawy.eslam.nutrisport.profile.ProfileViewModel
 import org.koin.core.KoinApplication
@@ -31,6 +32,7 @@ val sharedModule = module {
     viewModelOf(::AuthViewModel)
     viewModelOf(::HomeGraphViewModel)
     viewModelOf(::ProductsOverviewViewModel)
+    viewModelOf(::ProductDetailsViewModel)
     viewModelOf(::ProfileViewModel)
     viewModelOf(::AdminPanelViewModel)
     viewModelOf(::ManageProductViewModel)

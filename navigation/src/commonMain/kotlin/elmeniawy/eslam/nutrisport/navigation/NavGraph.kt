@@ -9,6 +9,7 @@ import elmeniawy.eslam.nutrisport.admin_panel.AdminPanelScreen
 import elmeniawy.eslam.nutrisport.auth.AuthScreen
 import elmeniawy.eslam.nutrisport.home.HomeGraphScreen
 import elmeniawy.eslam.nutrisport.manage_product.ManageProductScreen
+import elmeniawy.eslam.nutrisport.product_details.ProductDetailsScreen
 import elmeniawy.eslam.nutrisport.profile.ProfileScreen
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -48,6 +49,14 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
                 },
                 navigateToDetails = { productId ->
                     navController.navigate(Screen.ProductDetails(id = productId))
+                }
+            )
+        }
+
+        composable<Screen.ProductDetails> {
+            ProductDetailsScreen(
+                navigateBack = {
+                    navController.navigateUp()
                 }
             )
         }
