@@ -60,7 +60,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun MainProductCard(
     modifier: Modifier = Modifier,
     product: Product,
@@ -196,4 +195,20 @@ fun MainProductCard(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun MainProductCardPreview() {
+    val product = Product(
+        id = "1",
+        title = "Gold Standard Whey Protein",
+        description = "The world's best-selling whey protein powder.",
+        weight = 2270,
+        price = 59.99
+    )
+
+    MainProductCard(
+        product = product
+    )
 }

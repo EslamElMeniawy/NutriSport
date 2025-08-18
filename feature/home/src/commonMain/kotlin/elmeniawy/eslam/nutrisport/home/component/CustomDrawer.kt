@@ -1,6 +1,7 @@
 package elmeniawy.eslam.nutrisport.home.component
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import elmeniawy.eslam.nutrisport.home.domain.DrawerItem
 import elmeniawy.eslam.nutrisport.shared.BebasNeueFont
 import elmeniawy.eslam.nutrisport.shared.FontSize
+import elmeniawy.eslam.nutrisport.shared.SurfaceDarker
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import elmeniawy.eslam.nutrisport.shared.TextSecondary
 import elmeniawy.eslam.nutrisport.shared.domain.Customer
@@ -28,8 +30,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun CustomDrawer(
+    modifier: Modifier = Modifier,
     customer: RequestState<Customer>? = null,
     onProfileClick: (() -> Unit)? = null,
     onBlogClick: (() -> Unit)? = null,
@@ -39,7 +41,7 @@ fun CustomDrawer(
     onAdminPanelClick: (() -> Unit)? = null,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxHeight()
             .fillMaxWidth(0.6f)
             .padding(horizontal = 12.dp)
@@ -94,4 +96,17 @@ fun CustomDrawer(
 
         Spacer(modifier = Modifier.height(24.dp))
     }
+}
+
+@Preview
+@Composable
+private fun CustomDrawerPreview() {
+    CustomDrawer(
+        modifier = Modifier.fillMaxWidth().background(color = SurfaceDarker),
+        customer = RequestState.Success(
+            Customer(
+                isAdmin = true
+            )
+        )
+    )
 }

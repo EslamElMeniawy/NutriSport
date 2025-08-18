@@ -12,7 +12,6 @@ import elmeniawy.eslam.nutrisport.manage_product.ManageProductScreen
 import elmeniawy.eslam.nutrisport.product_details.ProductDetailsScreen
 import elmeniawy.eslam.nutrisport.profile.ProfileScreen
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
  * NavGraph
@@ -21,7 +20,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
     val navController = rememberNavController()
 

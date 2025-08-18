@@ -46,7 +46,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun GoogleButton(
     modifier: Modifier = Modifier,
     loading: Boolean = false,
@@ -102,4 +101,10 @@ fun GoogleButton(
             Text(text = buttonText, color = TextPrimary, fontSize = FontSize.REGULAR)
         }
     }
+}
+
+@Preview
+@Composable
+private fun GoogleButtonPreview() {
+    GoogleButton(onClick = {})
 }

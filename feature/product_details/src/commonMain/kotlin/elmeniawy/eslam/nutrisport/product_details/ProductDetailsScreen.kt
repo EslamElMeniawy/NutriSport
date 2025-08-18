@@ -61,7 +61,6 @@ import elmeniawy.eslam.nutrisport.shared.domain.ProductCategory
 import elmeniawy.eslam.nutrisport.shared.domain.QuantityCounterSize
 import elmeniawy.eslam.nutrisport.shared.util.DisplayResult
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
 
@@ -73,7 +72,6 @@ import rememberMessageBarState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview
 fun ProductDetailsScreen(
     navigateBack: (() -> Unit)? = null
 ) {

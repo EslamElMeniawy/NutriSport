@@ -40,7 +40,6 @@ import elmeniawy.eslam.nutrisport.shared.component.LoadingCard
 import elmeniawy.eslam.nutrisport.shared.component.ProductCard
 import elmeniawy.eslam.nutrisport.shared.util.DisplayResult
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 /**
@@ -51,7 +50,6 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview
 fun AdminPanelScreen(
     navigateBack: (() -> Unit)? = null,
     navigateToManageProduct: ((String?) -> Unit)? = null,

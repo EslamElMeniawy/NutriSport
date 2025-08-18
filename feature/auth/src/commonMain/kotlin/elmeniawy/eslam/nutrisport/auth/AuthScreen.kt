@@ -32,7 +32,6 @@ import elmeniawy.eslam.nutrisport.shared.TextSecondary
 import elmeniawy.eslam.nutrisport.shared.TextWhite
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
 
@@ -43,7 +42,6 @@ import rememberMessageBarState
  */
 
 @Composable
-@Preview
 fun AuthScreen(navigateToHome: (() -> Unit)? = null) {
     val coroutineScope = rememberCoroutineScope()
     val viewModel = koinViewModel<AuthViewModel>()

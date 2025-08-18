@@ -28,7 +28,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun FlavorChip(
     flavor: String,
     isSelected: Boolean = false,
@@ -54,4 +53,21 @@ fun FlavorChip(
             fontWeight = FontWeight.Medium
         )
     }
+}
+
+@Preview
+@Composable
+private fun FlavorChipPreview() {
+    FlavorChip(
+        flavor = "Vanilla"
+    )
+}
+
+@Preview
+@Composable
+private fun FlavorChipSelectedPreview() {
+    FlavorChip(
+        flavor = "Vanilla",
+        isSelected = true
+    )
 }

@@ -29,7 +29,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun BottomBar(
     modifier: Modifier = Modifier,
     selected: BottomBarDestination = BottomBarDestination.ProductsOverview,
@@ -58,4 +57,12 @@ fun BottomBar(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun BottomBarPreview() {
+    BottomBar(
+        onSelect = {}
+    )
 }

@@ -62,7 +62,6 @@ import elmeniawy.eslam.nutrisport.shared.TextWhite
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import elmeniawy.eslam.nutrisport.shared.util.getScreenWidth
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
 
@@ -73,7 +72,6 @@ import rememberMessageBarState
  */
 
 @Composable
-@Preview
 fun HomeGraphScreen(
     navigateToAuth: (() -> Unit)? = null,
     navigateToProfile: (() -> Unit)? = null,

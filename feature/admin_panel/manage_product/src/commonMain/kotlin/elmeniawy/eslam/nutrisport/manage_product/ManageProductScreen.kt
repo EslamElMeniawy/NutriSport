@@ -21,8 +21,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -74,7 +74,6 @@ import elmeniawy.eslam.nutrisport.shared.domain.ProductCategory
 import elmeniawy.eslam.nutrisport.shared.util.DisplayResult
 import elmeniawy.eslam.nutrisport.shared.util.RequestState
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
@@ -87,7 +86,6 @@ import rememberMessageBarState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview
 fun ManageProductScreen(
     id: String? = null,
     navigateBack: (() -> Unit)? = null,

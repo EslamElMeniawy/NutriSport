@@ -36,7 +36,6 @@ import elmeniawy.eslam.nutrisport.shared.component.InfoCard
 import elmeniawy.eslam.nutrisport.shared.component.LoadingCard
 import elmeniawy.eslam.nutrisport.shared.component.ProductCard
 import elmeniawy.eslam.nutrisport.shared.util.DisplayResult
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.math.abs
 
@@ -47,7 +46,6 @@ import kotlin.math.abs
  */
 
 @Composable
-@Preview
 fun ProductsOverviewScreen(
     navigateToDetails: ((String?) -> Unit)? = null
 ) {

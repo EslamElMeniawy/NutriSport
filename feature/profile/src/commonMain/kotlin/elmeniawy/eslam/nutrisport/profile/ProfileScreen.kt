@@ -32,7 +32,6 @@ import elmeniawy.eslam.nutrisport.shared.component.PrimaryButton
 import elmeniawy.eslam.nutrisport.shared.component.ProfileForm
 import elmeniawy.eslam.nutrisport.shared.util.DisplayResult
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
 
@@ -44,7 +43,6 @@ import rememberMessageBarState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview
 fun ProfileScreen(
     navigateBack: (() -> Unit)? = null
 ) {

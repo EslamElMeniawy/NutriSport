@@ -1,5 +1,6 @@
 package elmeniawy.eslam.nutrisport.home.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import elmeniawy.eslam.nutrisport.home.domain.DrawerItem
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
+import elmeniawy.eslam.nutrisport.shared.SurfaceDarker
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -28,13 +30,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun DrawerItemCard(
+    modifier: Modifier = Modifier,
     drawerItem: DrawerItem,
     onClick: (() -> Unit)? = null,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(size = 99.dp))
             .clickable { onClick?.invoke() }
@@ -55,4 +57,13 @@ fun DrawerItemCard(
             fontSize = FontSize.EXTRA_REGULAR
         )
     }
+}
+
+@Preview
+@Composable
+private fun DrawerItemCardPreview() {
+    DrawerItemCard(
+        modifier = Modifier.background(color = SurfaceDarker),
+        drawerItem = DrawerItem.Profile
+    )
 }
