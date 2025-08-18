@@ -33,7 +33,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun CustomTextField(
     modifier: Modifier = Modifier,
     value: String,
@@ -91,4 +90,10 @@ fun CustomTextField(
             )
         )
     )
+}
+
+@Composable
+@Preview
+private fun CustomTextFieldPreview() {
+    CustomTextField(value = "Sample Text")
 }

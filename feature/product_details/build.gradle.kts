@@ -74,3 +74,7 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
     }
 }
+
+dependencies {
+    debugImplementation(compose.uiTooling)
+}

@@ -31,7 +31,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun PrimaryButton(
     text: String,
     onClick: () -> Unit,
@@ -70,4 +69,13 @@ fun PrimaryButton(
             color = if (enabled) TextPrimary else TextPrimary.copy(alpha = Alpha.DISABLED)
         )
     }
+}
+
+@Preview
+@Composable
+private fun PrimaryButtonPreview() {
+    PrimaryButton(
+        text = "Login",
+        onClick = {}
+    )
 }

@@ -1,6 +1,7 @@
 package elmeniawy.eslam.nutrisport.shared.component
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import elmeniawy.eslam.nutrisport.shared.Surface
 import elmeniawy.eslam.nutrisport.shared.component.dialog.CountryPickerDialog
 import elmeniawy.eslam.nutrisport.shared.domain.Country
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -32,7 +34,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun ProfileForm(
     modifier: Modifier = Modifier,
     country: Country,
@@ -140,4 +141,27 @@ fun ProfileForm(
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun ProfileFormPreview() {
+    ProfileForm(
+        modifier = Modifier.background(color = Surface),
+        country = Country.Egypt,
+        onCountrySelect = {},
+        firstName = "Eslam",
+        onFirstNameChange = {},
+        lastName = "El-Meniawy",
+        onLastNameChange = {},
+        email = "eslam@elmeniawy.com",
+        city = null,
+        onCityChange = {},
+        postalCode = null,
+        onPostalCodeChange = {},
+        address = null,
+        onAddressChange = {},
+        phoneNumber = null,
+        onPhoneNumberChange = {}
+    )
 }

@@ -51,7 +51,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun ProductCard(
     modifier: Modifier = Modifier,
     product: Product,
@@ -160,4 +159,21 @@ fun ProductCard(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun ProductCardPreview() {
+    val product = Product(
+        id = "1",
+        title = "Product Title",
+        description = "This is a sample product description that can span multiple lines.",
+        weight = 500,
+        price = 29.99
+    )
+
+    ProductCard(
+        product = product,
+        onClick = {}
+    )
 }

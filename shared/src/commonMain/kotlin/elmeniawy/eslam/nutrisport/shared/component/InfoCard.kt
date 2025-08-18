@@ -1,6 +1,7 @@
 package elmeniawy.eslam.nutrisport.shared.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import elmeniawy.eslam.nutrisport.shared.FontSize
+import elmeniawy.eslam.nutrisport.shared.Resources
+import elmeniawy.eslam.nutrisport.shared.Surface
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -27,7 +30,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun InfoCard(
     modifier: Modifier = Modifier,
     image: DrawableResource,
@@ -64,4 +66,15 @@ fun InfoCard(
             textAlign = TextAlign.Center
         )
     }
+}
+
+@Preview
+@Composable
+private fun InfoCardPreview() {
+    InfoCard(
+        modifier = Modifier.background(color = Surface),
+        image = Resources.Image.Cat,
+        title = "Title",
+        subtitle = "Subtitle"
+    )
 }

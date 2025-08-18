@@ -62,7 +62,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun CountryPickerDialog(
     country: Country = Country.Egypt,
     onDismiss: () -> Unit,
@@ -175,7 +174,6 @@ fun CountryPickerDialog(
 }
 
 @Composable
-@Preview
 private fun CountryPicker(
     modifier: Modifier = Modifier,
     country: Country,
@@ -224,7 +222,6 @@ private fun CountryPicker(
 }
 
 @Composable
-@Preview
 private fun Selector(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false
@@ -261,4 +258,10 @@ fun List<Country>.filterByCountry(query: String): List<Country> {
         it.name.lowercase().contains(queryLower) ||
                 (queryInt != null && it.dialCode == queryInt)
     }
+}
+
+@Composable
+@Preview
+private fun CountryPickerDialogPreview() {
+    CountryPickerDialog(onDismiss = {})
 }

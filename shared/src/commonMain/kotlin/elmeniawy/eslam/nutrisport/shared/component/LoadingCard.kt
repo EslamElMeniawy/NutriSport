@@ -1,5 +1,6 @@
 package elmeniawy.eslam.nutrisport.shared.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
@@ -8,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
+import elmeniawy.eslam.nutrisport.shared.Surface
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -17,7 +19,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun LoadingCard(
     modifier: Modifier = Modifier,
 ) {
@@ -31,4 +32,10 @@ fun LoadingCard(
             strokeWidth = 2.dp
         )
     }
+}
+
+@Preview
+@Composable
+private fun LoadingCardPreview() {
+    LoadingCard(modifier = Modifier.background(color = Surface))
 }

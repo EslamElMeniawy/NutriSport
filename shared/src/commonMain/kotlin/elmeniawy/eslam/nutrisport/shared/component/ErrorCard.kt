@@ -1,5 +1,6 @@
 package elmeniawy.eslam.nutrisport.shared.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -9,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import elmeniawy.eslam.nutrisport.shared.FontSize
+import elmeniawy.eslam.nutrisport.shared.Surface
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
@@ -18,7 +20,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun ErrorCard(
     modifier: Modifier = Modifier,
     message: String,
@@ -35,4 +36,13 @@ fun ErrorCard(
             textAlign = TextAlign.Center
         )
     }
+}
+
+@Preview
+@Composable
+private fun ErrorCardPreview() {
+    ErrorCard(
+        modifier = Modifier.background(color = Surface),
+        message = "An error occurred."
+    )
 }

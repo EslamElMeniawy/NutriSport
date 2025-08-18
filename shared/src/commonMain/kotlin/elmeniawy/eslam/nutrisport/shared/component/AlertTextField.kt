@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import elmeniawy.eslam.nutrisport.shared.BorderIdle
 import elmeniawy.eslam.nutrisport.shared.FontSize
+import elmeniawy.eslam.nutrisport.shared.Resources
 import elmeniawy.eslam.nutrisport.shared.SurfaceLighter
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import org.jetbrains.compose.resources.DrawableResource
@@ -31,7 +32,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun AlertTextField(
     modifier: Modifier = Modifier,
     text: String,
@@ -67,4 +67,10 @@ fun AlertTextField(
             color = TextPrimary
         )
     }
+}
+
+@Composable
+@Preview
+private fun AlertTextFieldPreview() {
+    AlertTextField(text = "+20", onClick = {}, icon = Resources.Flag.Egypt)
 }

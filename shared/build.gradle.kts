@@ -94,3 +94,7 @@ buildkonfig {
         buildConfigField(FieldSpec.Type.STRING, "WEB_CLIENT_ID", apiKey)
     }
 }
+
+dependencies {
+    debugImplementation(compose.uiTooling)
+}

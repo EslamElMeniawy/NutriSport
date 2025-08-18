@@ -21,6 +21,7 @@ import elmeniawy.eslam.nutrisport.shared.Constants.MIN_QUANTITY
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
 import elmeniawy.eslam.nutrisport.shared.Resources
+import elmeniawy.eslam.nutrisport.shared.Surface
 import elmeniawy.eslam.nutrisport.shared.SurfaceBrand
 import elmeniawy.eslam.nutrisport.shared.SurfaceLighter
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
@@ -35,7 +36,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun QuantityCounter(
     modifier: Modifier = Modifier,
     size: QuantityCounterSize,
@@ -96,4 +96,13 @@ fun QuantityCounter(
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun QuantityCounterPreview() {
+    QuantityCounter(
+        modifier = Modifier.background(color = Surface),
+        size = QuantityCounterSize.Small
+    )
 }

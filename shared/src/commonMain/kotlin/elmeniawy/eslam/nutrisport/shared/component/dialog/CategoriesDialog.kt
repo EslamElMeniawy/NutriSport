@@ -46,7 +46,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-@Preview
 fun CategoriesDialog(
     category: ProductCategory,
     onDismiss: () -> Unit,
@@ -143,4 +142,10 @@ fun CategoriesDialog(
             }
         }
     )
+}
+
+@Composable
+@Preview
+private fun CategoriesDialogPreview() {
+    CategoriesDialog(category = ProductCategory.Protein, onDismiss = {}, onConfirmClick = {})
 }
