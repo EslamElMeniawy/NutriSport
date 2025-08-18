@@ -24,8 +24,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import elmeniawy.eslam.nutrisport.products_overview.component.MainProductCard
 import elmeniawy.eslam.nutrisport.shared.Alpha
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.Resources
@@ -36,6 +38,7 @@ import elmeniawy.eslam.nutrisport.shared.component.ProductCard
 import elmeniawy.eslam.nutrisport.shared.util.DisplayResult
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
+import kotlin.math.abs
 
 /**
  * ProductsOverviewScreen
@@ -59,7 +62,7 @@ fun ProductsOverviewScreen(
 
             layoutInfo.visibleItemsInfo.minByOrNull { item ->
                 val itemCenter = item.offset + item.size / 2
-                kotlin.math.abs(itemCenter - viewportCenter)
+                abs(itemCenter - viewportCenter)
             }?.index
         }
     }
@@ -94,15 +97,15 @@ fun ProductsOverviewScreen(
                                     animationSpec = tween(300)
                                 )
 
-//                                MainProductCard(
-//                                    modifier = Modifier
-//                                        .scale(animatedScale)
-//                                        .height(300.dp)
-//                                        .fillParentMaxWidth(0.6f),
-//                                    product = product,
-//                                    isLarge = isLarge,
-//                                    onClick = { navigateToDetails(it) }
-//                                )
+                                MainProductCard(
+                                    modifier = Modifier
+                                        .scale(animatedScale)
+                                        .height(300.dp)
+                                        .fillParentMaxWidth(0.6f),
+                                    product = product,
+                                    isLarge = isLarge,
+                                    onClick = { navigateToDetails?.invoke(it) }
+                                )
                             }
                         }
 

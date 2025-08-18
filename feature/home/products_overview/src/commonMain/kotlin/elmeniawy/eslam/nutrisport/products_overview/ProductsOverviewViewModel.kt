@@ -21,12 +21,13 @@ class ProductsOverviewViewModel(
         _productRepository.readDiscountedProducts()
     ) { new, discounted ->
         when {
-            new.isSuccess() && discounted.isSuccess() -> {
+            new.isSuccess() && discounted.isSuccess() ->
                 RequestState.Success(new.getSuccessData() + discounted.getSuccessData())
-            }
 
             new.isError() -> new
+
             discounted.isError() -> discounted
+
             else -> RequestState.Loading
         }
     }.stateIn(

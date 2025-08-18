@@ -46,8 +46,8 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
                 navigateToAdminPanel = {
                     navController.navigate(Screen.AdminPanel)
                 },
-                navigateToDetails = { id ->
-//                    navController.navigate(Screen.ManageProduct(id = id))
+                navigateToDetails = { productId ->
+                    navController.navigate(Screen.ProductDetails(id = productId))
                 }
             )
         }
