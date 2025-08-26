@@ -1,14 +1,19 @@
 package elmeniawy.eslam.nutrisport.home.component
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -19,6 +24,9 @@ import elmeniawy.eslam.nutrisport.home.domain.BottomBarDestination
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
 import elmeniawy.eslam.nutrisport.shared.IconSecondary
 import elmeniawy.eslam.nutrisport.shared.SurfaceLighter
+import elmeniawy.eslam.nutrisport.shared.domain.CartItem
+import elmeniawy.eslam.nutrisport.shared.domain.Customer
+import elmeniawy.eslam.nutrisport.shared.util.RequestState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -31,6 +39,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomBar(
     modifier: Modifier = Modifier,
+    customer: RequestState<Customer>,
     selected: BottomBarDestination = BottomBarDestination.ProductsOverview,
     onSelect: (BottomBarDestination) -> Unit
 ) {
@@ -39,7 +48,10 @@ fun BottomBar(
             .fillMaxWidth()
             .clip(RoundedCornerShape(size = 12.dp))
             .background(SurfaceLighter)
-            .padding(vertical = 12.dp, horizontal = 36.dp),
+            .padding(
+                vertical = 24.dp,
+                horizontal = 36.dp
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -48,12 +60,29 @@ fun BottomBar(
                 targetValue = if (selected == destination) IconSecondary else IconPrimary
             )
 
-            IconButton(onClick = { onSelect(destination) }) {
+            Box(contentAlignment = Alignment.TopEnd) {
                 Icon(
+                    modifier = Modifier.clickable { onSelect(destination) },
                     painter = painterResource(destination.icon),
-                    contentDescription = destination.title,
+                    contentDescription = "Bottom Bar destination icon",
                     tint = animatedTint
                 )
+
+                if (destination == BottomBarDestination.Cart) {
+                    AnimatedContent(
+                        targetState = customer
+                    ) { customerState ->
+                        if (customerState.isSuccess() && !customerState.getSuccessData().cart.isNullOrEmpty()) {
+                            Box(
+                                modifier = Modifier
+                                    .size(8.dp)
+                                    .offset(x = 4.dp, y = (-4).dp)
+                                    .clip(CircleShape)
+                                    .background(IconSecondary)
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -63,6 +92,17 @@ fun BottomBar(
 @Composable
 private fun BottomBarPreview() {
     BottomBar(
+        customer = RequestState.Success(Customer()),
+        onSelect = {}
+    )
+}
+
+@Preview
+@Composable
+private fun BottomBarPreviewCart() {
+    BottomBar(
+        customer = RequestState.Success(Customer(cart = listOf(CartItem()))),
+        selected = BottomBarDestination.Cart,
         onSelect = {}
     )
 }

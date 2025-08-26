@@ -150,8 +150,8 @@ class CustomerRepositoryImp : CustomerRepository {
                     .get()
 
                 if (existingCustomer.exists) {
-                    val existingCart = existingCustomer.get<List<CartItem>?>("cart")
-                    val updatedCart = existingCart?.plus(cartItem)
+                    val existingCart = existingCustomer.get<List<CartItem>?>("cart") ?: listOf()
+                    val updatedCart = existingCart + (cartItem)
 
                     customerCollection.document(currentUserId)
                         .set(
@@ -189,9 +189,9 @@ class CustomerRepositoryImp : CustomerRepository {
                     .get()
 
                 if (existingCustomer.exists) {
-                    val existingCart = existingCustomer.get<List<CartItem>?>("cart")
+                    val existingCart = existingCustomer.get<List<CartItem>?>("cart") ?: listOf()
 
-                    val updatedCart = existingCart?.map { cartItem ->
+                    val updatedCart = existingCart.map { cartItem ->
                         if (cartItem.id == id) {
                             cartItem.copy(quantity = quantity)
                         } else cartItem
@@ -229,8 +229,8 @@ class CustomerRepositoryImp : CustomerRepository {
                     .get()
 
                 if (existingCustomer.exists) {
-                    val existingCart = existingCustomer.get<List<CartItem>?>("cart")
-                    val updatedCart = existingCart?.filterNot { it.id == id }
+                    val existingCart = existingCustomer.get<List<CartItem>?>("cart") ?: listOf()
+                    val updatedCart = existingCart.filterNot { it.id == id }
 
                     customerCollection.document(currentUserId)
                         .update(data = mapOf("cart" to updatedCart))

@@ -41,6 +41,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import elmeniawy.eslam.nutrisport.cart.CartScreen
 import elmeniawy.eslam.nutrisport.home.component.BottomBar
 import elmeniawy.eslam.nutrisport.home.component.CustomDrawer
 import elmeniawy.eslam.nutrisport.home.domain.BottomBarDestination
@@ -219,7 +220,10 @@ fun HomeGraphScreen(
                                 )
                             }
 
-                            composable<Screen.Cart> { }
+                            composable<Screen.Cart> {
+                                CartScreen()
+                            }
+
                             composable<Screen.Categories> { }
                         }
 
@@ -227,6 +231,7 @@ fun HomeGraphScreen(
 
                         Box(modifier = Modifier.padding(all = 12.dp)) {
                             BottomBar(
+                                customer = customer,
                                 selected = selectedDestination,
                                 onSelect = { destination ->
                                     navController.navigate(destination.screen) {
