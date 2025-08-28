@@ -28,6 +28,9 @@ sealed class Screen {
     data object Categories : Screen()
 
     @Serializable
+    data class CategorySearch(val categoryName: String) : Screen()
+
+    @Serializable
     data object Profile : Screen()
 
     @Serializable

@@ -42,6 +42,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import elmeniawy.eslam.nutrisport.cart.CartScreen
+import elmeniawy.eslam.nutrisport.categories.CategoriesScreen
 import elmeniawy.eslam.nutrisport.home.component.BottomBar
 import elmeniawy.eslam.nutrisport.home.component.CustomDrawer
 import elmeniawy.eslam.nutrisport.home.domain.BottomBarDestination
@@ -77,7 +78,8 @@ fun HomeGraphScreen(
     navigateToAuth: (() -> Unit)? = null,
     navigateToProfile: (() -> Unit)? = null,
     navigateToAdminPanel: (() -> Unit)? = null,
-    navigateToDetails: ((String?) -> Unit)? = null
+    navigateToDetails: ((String?) -> Unit)? = null,
+    navigateToCategorySearch: ((String) -> Unit)? = null
 ) {
     val viewModel = koinViewModel<HomeGraphViewModel>()
     val customer by viewModel.customer.collectAsState()
@@ -224,7 +226,11 @@ fun HomeGraphScreen(
                                 CartScreen()
                             }
 
-                            composable<Screen.Categories> { }
+                            composable<Screen.Categories> {
+                                CategoriesScreen(
+                                    navigateToCategorySearch = navigateToCategorySearch
+                                )
+                            }
                         }
 
                         Spacer(modifier = Modifier.height(12.dp))

@@ -3,6 +3,7 @@ package elmeniawy.eslam.nutrisport.di
 import elmeniawy.eslam.nutrisport.admin_panel.AdminPanelViewModel
 import elmeniawy.eslam.nutrisport.auth.AuthViewModel
 import elmeniawy.eslam.nutrisport.cart.CartViewModel
+import elmeniawy.eslam.nutrisport.category_search.CategorySearchViewModel
 import elmeniawy.eslam.nutrisport.data.AdminRepositoryImpl
 import elmeniawy.eslam.nutrisport.data.CustomerRepositoryImp
 import elmeniawy.eslam.nutrisport.data.ProductRepositoryImpl
@@ -34,6 +35,7 @@ val sharedModule = module {
     viewModelOf(::HomeGraphViewModel)
     viewModelOf(::ProductsOverviewViewModel)
     viewModelOf(::CartViewModel)
+    viewModelOf(::CategorySearchViewModel)
     viewModelOf(::ProductDetailsViewModel)
     viewModelOf(::ProfileViewModel)
     viewModelOf(::AdminPanelViewModel)

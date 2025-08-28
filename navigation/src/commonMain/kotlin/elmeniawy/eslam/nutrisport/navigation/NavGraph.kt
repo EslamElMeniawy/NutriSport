@@ -7,10 +7,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import elmeniawy.eslam.nutrisport.admin_panel.AdminPanelScreen
 import elmeniawy.eslam.nutrisport.auth.AuthScreen
+import elmeniawy.eslam.nutrisport.category_search.CategorySearchScreen
 import elmeniawy.eslam.nutrisport.home.HomeGraphScreen
 import elmeniawy.eslam.nutrisport.manage_product.ManageProductScreen
 import elmeniawy.eslam.nutrisport.product_details.ProductDetailsScreen
 import elmeniawy.eslam.nutrisport.profile.ProfileScreen
+import elmeniawy.eslam.nutrisport.shared.domain.ProductCategory
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 
 /**
@@ -47,7 +49,10 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
                 },
                 navigateToDetails = { productId ->
                     navController.navigate(Screen.ProductDetails(id = productId))
-                }
+                },
+                navigateToCategorySearch = { categoryName ->
+                    navController.navigate(Screen.CategorySearch(categoryName))
+                },
             )
         }
 
@@ -83,6 +88,22 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
 
             ManageProductScreen(
                 id = id,
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+
+        composable<Screen.CategorySearch> {
+            val category = ProductCategory.valueOf(
+                it.toRoute<Screen.CategorySearch>().categoryName
+            )
+
+            CategorySearchScreen(
+                category = category,
+                navigateToDetails = { productId ->
+                    navController.navigate(Screen.ProductDetails(id = productId))
+                },
                 navigateBack = {
                     navController.navigateUp()
                 }
