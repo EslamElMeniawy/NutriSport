@@ -4,6 +4,7 @@ package elmeniawy.eslam.nutrisport.home
 
 import ContentWithMessageBar
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -62,6 +63,7 @@ import elmeniawy.eslam.nutrisport.shared.SurfaceLighter
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import elmeniawy.eslam.nutrisport.shared.TextWhite
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
+import elmeniawy.eslam.nutrisport.shared.util.RequestState
 import elmeniawy.eslam.nutrisport.shared.util.getScreenWidth
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -79,10 +81,12 @@ fun HomeGraphScreen(
     navigateToProfile: (() -> Unit)? = null,
     navigateToAdminPanel: (() -> Unit)? = null,
     navigateToDetails: ((String?) -> Unit)? = null,
-    navigateToCategorySearch: ((String) -> Unit)? = null
+    navigateToCategorySearch: ((String) -> Unit)? = null,
+    navigateToCheckout: ((String) -> Unit)? = null,
 ) {
     val viewModel = koinViewModel<HomeGraphViewModel>()
     val customer by viewModel.customer.collectAsState()
+    val totalAmount by viewModel.totalAmountFlow.collectAsState(RequestState.Loading)
     val messageBarState = rememberMessageBarState()
     val navController = rememberNavController()
     val currentRouteState = navController.currentBackStackEntryAsState()
@@ -164,6 +168,29 @@ fun HomeGraphScreen(
                                     fontSize = FontSize.LARGE,
                                     color = TextPrimary
                                 )
+                            }
+                        },
+                        actions = {
+                            AnimatedVisibility(
+                                visible = selectedDestination == BottomBarDestination.Cart
+                            ) {
+                                if (customer.isSuccess() && !customer.getSuccessData().cart.isNullOrEmpty()) {
+                                    IconButton(onClick = {
+                                        if (totalAmount.isSuccess()) {
+                                            navigateToCheckout?.invoke(
+                                                totalAmount.getSuccessData().toString()
+                                            )
+                                        } else if (totalAmount.isError()) {
+                                            messageBarState.addError("Error while calculating a total amount: ${totalAmount.getErrorMessage()}")
+                                        }
+                                    }) {
+                                        Icon(
+                                            painter = painterResource(Resources.Icon.RightArrow),
+                                            contentDescription = "Right icon",
+                                            tint = IconPrimary
+                                        )
+                                    }
+                                }
                             }
                         },
                         navigationIcon = {

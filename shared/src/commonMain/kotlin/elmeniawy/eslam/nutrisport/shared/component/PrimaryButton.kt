@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import elmeniawy.eslam.nutrisport.shared.Alpha
 import elmeniawy.eslam.nutrisport.shared.ButtonDisabled
 import elmeniawy.eslam.nutrisport.shared.ButtonPrimary
+import elmeniawy.eslam.nutrisport.shared.ButtonSecondary
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
@@ -36,7 +37,8 @@ fun PrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     icon: DrawableResource? = null,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    secondary: Boolean = false,
 ) {
     Button(
         modifier = modifier.fillMaxWidth(),
@@ -44,7 +46,7 @@ fun PrimaryButton(
         enabled = enabled,
         shape = RoundedCornerShape(size = 6.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = ButtonPrimary,
+            containerColor = if (secondary) ButtonSecondary else ButtonPrimary,
             contentColor = TextPrimary,
             disabledContainerColor = ButtonDisabled,
             disabledContentColor = TextPrimary.copy(alpha = Alpha.DISABLED)

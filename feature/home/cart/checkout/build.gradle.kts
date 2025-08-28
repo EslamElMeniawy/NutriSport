@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -22,12 +23,18 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "di"
+            baseName = "checkout"
             isStatic = true
         }
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.ktor.android.client)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.darwin.client)
+        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -37,21 +44,17 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.messagebar.kmp)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization)
+            implementation(libs.browser.kmp)
+            implementation(project(path = ":shared"))
             implementation(project(path = ":data"))
-            implementation(project(":shared"))
-            implementation(project(path = ":feature:auth"))
-            implementation(project(path = ":feature:home"))
-            implementation(project(path = ":feature:home:products_overview"))
-            implementation(project(path = ":feature:home:cart"))
-            implementation(project(path = ":feature:home:cart:checkout"))
-            implementation(project(path = ":feature:home:categories:category_search"))
-            implementation(project(path = ":feature:product_details"))
-            implementation(project(path = ":feature:profile"))
-            implementation(project(path = ":feature:admin_panel"))
-            implementation(project(path = ":feature:admin_panel:manage_product"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -60,7 +63,7 @@ kotlin {
 }
 
 android {
-    namespace = "elmeniawy.eslam.nutrisport.di"
+    namespace = "elmeniawy.eslam.nutrisport.checkout"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -73,4 +76,8 @@ android {
     testOptions {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
     }
+}
+
+dependencies {
+    debugImplementation(compose.uiTooling)
 }

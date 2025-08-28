@@ -1,6 +1,9 @@
 package elmeniawy.eslam.nutrisport.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -8,12 +11,14 @@ import androidx.navigation.toRoute
 import elmeniawy.eslam.nutrisport.admin_panel.AdminPanelScreen
 import elmeniawy.eslam.nutrisport.auth.AuthScreen
 import elmeniawy.eslam.nutrisport.category_search.CategorySearchScreen
+import elmeniawy.eslam.nutrisport.checkout.CheckoutScreen
 import elmeniawy.eslam.nutrisport.home.HomeGraphScreen
 import elmeniawy.eslam.nutrisport.manage_product.ManageProductScreen
 import elmeniawy.eslam.nutrisport.product_details.ProductDetailsScreen
 import elmeniawy.eslam.nutrisport.profile.ProfileScreen
 import elmeniawy.eslam.nutrisport.shared.domain.ProductCategory
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
+import elmeniawy.eslam.nutrisport.shared.util.PreferencesRepository
 
 /**
  * NavGraph
@@ -24,6 +29,18 @@ import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 @Composable
 fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
     val navController = rememberNavController()
+
+    val preferencesData by PreferencesRepository.readPayPalDataFlow()
+        .collectAsState(initial = null)
+
+    LaunchedEffect(preferencesData) {
+        preferencesData?.let { paymentCompleted ->
+            if (paymentCompleted.token != null) {
+                navController.navigate(paymentCompleted)
+                PreferencesRepository.reset()
+            }
+        }
+    }
 
     NavHost(navController = navController, startDestination = startDestination) {
         composable<Screen.Auth> {
@@ -53,6 +70,9 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
                 navigateToCategorySearch = { categoryName ->
                     navController.navigate(Screen.CategorySearch(categoryName))
                 },
+                navigateToCheckout = { totalAmount ->
+                    navController.navigate(Screen.Checkout(totalAmount))
+                }
             )
         }
 
@@ -106,6 +126,20 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
                 },
                 navigateBack = {
                     navController.navigateUp()
+                }
+            )
+        }
+
+        composable<Screen.Checkout> {
+            val totalAmount = it.toRoute<Screen.Checkout>().totalAmount
+
+            CheckoutScreen(
+                totalAmount = totalAmount.toDoubleOrNull() ?: 0.0,
+                navigateBack = {
+                    navController.navigateUp()
+                },
+                navigateToPaymentCompleted = { isSuccess, error ->
+                    navController.navigate(Screen.PaymentCompleted(isSuccess, error))
                 }
             )
         }
