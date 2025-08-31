@@ -20,6 +20,7 @@ import elmeniawy.eslam.nutrisport.product_details.ProductDetailsViewModel
 import elmeniawy.eslam.nutrisport.products_overview.ProductsOverviewViewModel
 import elmeniawy.eslam.nutrisport.profile.ProfileViewModel
 import elmeniawy.eslam.nutrisport.shared.util.IntentHandler
+import lmeniawy.eslam.nutrisport.payment_completed.PaymentViewModel
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -47,6 +48,7 @@ val sharedModule = module {
     viewModelOf(::CategorySearchViewModel)
     viewModelOf(::ProductDetailsViewModel)
     viewModelOf(::ProfileViewModel)
+    viewModelOf(::PaymentViewModel)
     viewModelOf(::AdminPanelViewModel)
     viewModelOf(::ManageProductViewModel)
 }

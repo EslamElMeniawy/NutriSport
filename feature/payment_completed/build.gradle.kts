@@ -22,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "di"
+            baseName = "payment_completed"
             isStatic = true
         }
     }
@@ -37,22 +37,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(project(path = ":shared"))
             implementation(project(path = ":data"))
-            implementation(project(":shared"))
-            implementation(project(path = ":feature:auth"))
-            implementation(project(path = ":feature:home"))
-            implementation(project(path = ":feature:home:products_overview"))
-            implementation(project(path = ":feature:home:cart"))
-            implementation(project(path = ":feature:home:cart:checkout"))
-            implementation(project(path = ":feature:home:categories:category_search"))
-            implementation(project(path = ":feature:product_details"))
-            implementation(project(path = ":feature:profile"))
-            implementation(project(path = ":feature:payment_completed"))
-            implementation(project(path = ":feature:admin_panel"))
-            implementation(project(path = ":feature:admin_panel:manage_product"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -61,7 +49,7 @@ kotlin {
 }
 
 android {
-    namespace = "elmeniawy.eslam.nutrisport.di"
+    namespace = "elmeniawy.eslam.nutrisport.payment_completed"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -74,4 +62,8 @@ android {
     testOptions {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
     }
+}
+
+dependencies {
+    debugImplementation(compose.uiTooling)
 }

@@ -19,6 +19,7 @@ import elmeniawy.eslam.nutrisport.profile.ProfileScreen
 import elmeniawy.eslam.nutrisport.shared.domain.ProductCategory
 import elmeniawy.eslam.nutrisport.shared.navigation.Screen
 import elmeniawy.eslam.nutrisport.shared.util.PreferencesRepository
+import lmeniawy.eslam.nutrisport.payment_completed.PaymentCompleted
 
 /**
  * NavGraph
@@ -140,6 +141,18 @@ fun SetupNavGraph(startDestination: Screen = Screen.Auth) {
                 },
                 navigateToPaymentCompleted = { isSuccess, error ->
                     navController.navigate(Screen.PaymentCompleted(isSuccess, error))
+                }
+            )
+        }
+
+        composable<Screen.PaymentCompleted> {
+            PaymentCompleted(
+                navigateBack = {
+                    navController.navigate(Screen.HomeGraph) {
+                        launchSingleTop = true
+                        // Clear backstack completely
+                        popUpTo(0) { inclusive = true }
+                    }
                 }
             )
         }
