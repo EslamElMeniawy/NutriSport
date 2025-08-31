@@ -85,13 +85,25 @@ buildkonfig {
     packageName = "elmeniawy.eslam.nutrisport.shared"
 
     defaultConfigs {
-        val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("WEB_CLIENT_ID")
+        val webClientId: String = gradleLocalProperties(rootDir, providers).getProperty("WEB_CLIENT_ID")
+        val paypalClientId: String = gradleLocalProperties(rootDir, providers).getProperty("PAYPAL_CLIENT_ID")
+        val paypalSecretId: String = gradleLocalProperties(rootDir, providers).getProperty("PAYPAL_SECRET_ID")
 
-        require(apiKey.isNotEmpty()) {
-            "Register your api key from developer and place it in local.properties as `WEB_CLIENT_ID`"
+        require(webClientId.isNotEmpty()) {
+            "Register your web client id from developer and place it in local.properties as `WEB_CLIENT_ID`"
         }
 
-        buildConfigField(FieldSpec.Type.STRING, "WEB_CLIENT_ID", apiKey)
+        require(paypalClientId.isNotEmpty()) {
+            "Register your paypal client id from developer and place it in local.properties as `PAYPAL_CLIENT_ID`"
+        }
+
+        require(paypalSecretId.isNotEmpty()) {
+            "Register your paypal secret id from developer and place it in local.properties as `PAYPAL_SECRET_ID`"
+        }
+
+        buildConfigField(FieldSpec.Type.STRING, "WEB_CLIENT_ID", webClientId)
+        buildConfigField(FieldSpec.Type.STRING, "PAYPAL_CLIENT_ID", paypalClientId)
+        buildConfigField(FieldSpec.Type.STRING, "PAYPAL_SECRET_ID", paypalSecretId)
     }
 }
 

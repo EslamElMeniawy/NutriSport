@@ -1,5 +1,6 @@
 package elmeniawy.eslam.nutrisport
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import elmeniawy.eslam.nutrisport.shared.util.PreferencesRepository
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             App()
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        val uri = intent.data
+        val isSuccess = uri?.getQueryParameter("success")
+        val isCancelled = uri?.getQueryParameter("cancel")
+        val token = uri?.getQueryParameter("token")
+
+        PreferencesRepository.savePayPalData(
+            isSuccess = isSuccess?.toBooleanStrictOrNull(),
+            error = if (isCancelled == "null") null
+            else "Payment has been canceled.",
+            token = token
+        )
     }
 }
 

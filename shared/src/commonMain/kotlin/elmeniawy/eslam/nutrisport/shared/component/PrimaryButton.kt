@@ -12,6 +12,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import elmeniawy.eslam.nutrisport.shared.Alpha
@@ -20,6 +21,7 @@ import elmeniawy.eslam.nutrisport.shared.ButtonPrimary
 import elmeniawy.eslam.nutrisport.shared.ButtonSecondary
 import elmeniawy.eslam.nutrisport.shared.FontSize
 import elmeniawy.eslam.nutrisport.shared.IconPrimary
+import elmeniawy.eslam.nutrisport.shared.Resources
 import elmeniawy.eslam.nutrisport.shared.TextPrimary
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -58,7 +60,7 @@ fun PrimaryButton(
                 modifier = Modifier.size(14.dp),
                 painter = painterResource(icon),
                 contentDescription = "Button icon",
-                tint = if (enabled) IconPrimary else IconPrimary.copy(alpha = Alpha.DISABLED)
+                tint = if (icon == Resources.Image.PaypalLogo) Color.Unspecified else IconPrimary
             )
 
             Spacer(modifier = Modifier.width(12.dp))
