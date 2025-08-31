@@ -4,12 +4,12 @@ import FirebaseCore
 //import FirebaseMessaging
 import GoogleSignIn
 import SwiftUI
-//import shared
+import shared
 
 @main
 struct iOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -18,38 +18,36 @@ struct iOSApp: App {
 
                     if GIDSignIn.sharedInstance.handle(url) { return }
 
-//                    guard
-//                        let components = URLComponents(
-//                            url: url,
-//                            resolvingAgainstBaseURL: true
-//                        ),
-//                        let queryItems = components.queryItems
-//                    else { return }
-//
-//                    let success =
-//                        queryItems.first(where: { $0.name == "success" })?.value
-//                        == "true"
-//                    
-//                    let cancel =
-//                        queryItems.first(where: { $0.name == "cancel" })?.value
-//                        == "true"
-//                    
-//                    let token = queryItems.first(where: { $0.name == "token" })?
-//                        .value
-//
-//                    print(
-//                        """
-//                            ✅ Success: \(success)
-//                            ✅ Cancel: \(cancel)
-//                            ✅ Token: \(token ?? "null")
-//                        """
-//                    )
+                    guard
+                        let components = URLComponents(
+                            url: url,
+                            resolvingAgainstBaseURL: true
+                        ),
+                        let queryItems = components.queryItems
+                    else { return }
 
-//                    PreferencesRepository().savePayPalData(
-//                        isSuccess: success ? KotlinBoolean(value: true) : nil,
-//                        error: cancel ? "Payment canceled." : nil,
-//                        token: token
-//                    )
+                    let success =
+                        queryItems.first(where: { $0.name == "success" })?.value
+                        == "true"
+                    let cancel =
+                        queryItems.first(where: { $0.name == "cancel" })?.value
+                        == "true"
+                    let token = queryItems.first(where: { $0.name == "token" })?
+                        .value
+
+                    print(
+                        """
+                            ✅ Success: \(success)
+                            ✅ Cancel: \(cancel)
+                            ✅ Token: \(token ?? "null")
+                        """
+                    )
+
+                    PreferencesRepository().savePayPalData(
+                        isSuccess: success ? KotlinBoolean(value: true) : nil,
+                        error: cancel ? "Payment canceled." : nil,
+                        token: token
+                    )
                 }
         }
     }
@@ -63,21 +61,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         FirebaseApp.configure()
 
-//        NotifierManager.shared.initialize(
-//            configuration: NotificationPlatformConfigurationIos(
-//                showPushNotification: true,
-//                askNotificationPermissionOnStart: true,
-//                notificationSoundName: nil
-//            )
-//        )
+        //        NotifierManager.shared.initialize(
+        //            configuration: NotificationPlatformConfigurationIos(
+        //                showPushNotification: true,
+        //                askNotificationPermissionOnStart: true,
+        //                notificationSoundName: nil
+        //            )
+        //        )
 
         return true
     }
 
-//    func application(
-//        _ application: UIApplication,
-//        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-//    ) {
-//        Messaging.messaging().apnsToken = deviceToken
-//    }
+    //    func application(
+    //        _ application: UIApplication,
+    //        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    //    ) {
+    //        Messaging.messaging().apnsToken = deviceToken
+    //    }
 }

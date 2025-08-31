@@ -143,9 +143,7 @@ fun CheckoutScreen(
                         enabled = isFormValid,
                         onClick = {
                             viewModel.payWithPayPal(
-                                onSuccess = {
-
-                                },
+                                onSuccess = {},
                                 onError = { message ->
                                     messageBarState.addError(message)
                                 }
