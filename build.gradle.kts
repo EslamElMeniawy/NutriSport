@@ -8,8 +8,3 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.buildKonfig) apply false
 }
-//buildscript {
-//    dependencies {
-//        classpath("io.kotzilla:kotzilla-plugin:1.2.0-Beta3")
-//    }
-//}
