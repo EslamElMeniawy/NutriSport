@@ -1,7 +1,7 @@
-//import ComposeApp
+import ComposeApp
 import Firebase
 import FirebaseCore
-//import FirebaseMessaging
+import FirebaseMessaging
 import GoogleSignIn
 import SwiftUI
 import shared
@@ -61,21 +61,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         FirebaseApp.configure()
 
-        //        NotifierManager.shared.initialize(
-        //            configuration: NotificationPlatformConfigurationIos(
-        //                showPushNotification: true,
-        //                askNotificationPermissionOnStart: true,
-        //                notificationSoundName: nil
-        //            )
-        //        )
+        NotifierManager.shared.initialize(
+            configuration: NotificationPlatformConfigurationIos(
+                showPushNotification: true,
+                askNotificationPermissionOnStart: true,
+                notificationSoundName: nil
+            )
+        )
 
         return true
     }
 
-    //    func application(
-    //        _ application: UIApplication,
-    //        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-    //    ) {
-    //        Messaging.messaging().apnsToken = deviceToken
-    //    }
+    func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
 }
